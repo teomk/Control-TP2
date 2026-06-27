@@ -1,3 +1,4 @@
+from matplotlib import markers
 import numpy as np
 import control as ctrl
 import matplotlib.pyplot as plt
@@ -30,6 +31,41 @@ def LQI(Q_a, R, A_a, B_a, E_a, verbose=False):
         "Q_a": Q_a,
         "R": R
     }
+
+def plot_poles(controllers, save=False, save_dir='plots'):
+    if save and not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+
+    fig = plt.figure(figsize=(6, 6))
+
+    markers = ["o", "s", "^", "D", "P", "X"]
+
+    for i, (name, controller) in enumerate(controllers.items()):
+        poles = controller["poles"]
+        plt.scatter(
+            poles.real,
+            poles.imag,
+            label=name,
+            s=100,
+            alpha=0.65,
+            marker=markers[i % len(markers)],
+            edgecolors="black",
+            linewidths=0.7
+        )
+
+    plt.axhline(0, color='black', lw=0.5)
+    plt.axvline(0, color='black', lw=0.5)
+    plt.xlabel("Real")
+    plt.ylabel("Imaginary")
+    plt.title("Polos de los controladores LQI")
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    plt.tight_layout()
+
+    if save:
+        fig.savefig(f"{save_dir}/polos.png", dpi=300)
+
+    plt.show()
 
 def get_info(name, controller, T, psi_ref, x0):
     K_a = controller["K_a"]
