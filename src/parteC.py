@@ -1,22 +1,22 @@
-from matplotlib import markers
 import numpy as np
 import control as ctrl
 import matplotlib.pyplot as plt
 import os
 import pandas as pd
 
+colors = {
+    "AGRESIVO": "red",
+    "INTERMEDIO": "green",
+    "SUAVE": "blue",
+    "PARTE A": "black"
+}
 
 def LQI(Q_a, R, A_a, B_a, E_a, verbose=False):
     K_a, S, poles = ctrl.lqr(A_a, B_a, Q_a, R)
 
     A_cl = A_a - B_a @ K_a
 
-    sys_cl = ctrl.ss(
-        A_cl,
-        E_a,
-        np.eye(4),
-        np.zeros((4, 1))
-    )
+    sys_cl = ctrl.ss(A_cl, E_a, np.eye(4), np.zeros((4, 1)))
 
     if verbose: 
         print("K_a =", K_a)
@@ -50,7 +50,8 @@ def plot_poles(controllers, save=False, save_dir='plots'):
             alpha=0.65,
             marker=markers[i % len(markers)],
             edgecolors="black",
-            linewidths=0.7
+            linewidths=0.7,
+            color=colors[name]
         )
 
     plt.axhline(0, color='black', lw=0.5)
@@ -71,12 +72,7 @@ def get_info(name, controller, T, psi_ref, x0):
     K_a = controller["K_a"]
     sys_cl = controller["sys_cl"]
 
-    T_sim, x_a = ctrl.forced_response(
-        sys_cl,
-        T=T,
-        U=psi_ref,
-        X0=x0
-    )
+    T_sim, x_a = ctrl.forced_response(sys_cl, T=T, U=psi_ref, X0=x0)
 
     v = x_a[0, :]
     r_yaw = x_a[1, :]
@@ -118,6 +114,10 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
     if save and not os.path.exists(save_dir):
         os.makedirs(save_dir)
 
+    fontsize_labels = 14
+    fontsize_title = 14
+    fontsize_legend = 10
+
     # 1) Seguimiento de referencia
     fig1 = plt.figure(figsize=(10, 4))
 
@@ -125,16 +125,16 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
     T_ref = first_result["T"]
     psi_ref = first_result["psi_ref"]
 
-    plt.plot(T_ref, psi_ref, "--", label=r"$\psi_{ref}(t)$", linewidth=2)
+    plt.plot(T_ref, psi_ref, "--", label=r"$\psi_{ref}(t)$", linewidth=2, color="orange")
 
     for name, result in results.items():
-        plt.plot(result["T"], result["psi"], label=fr"$\psi(t)$ - {name}", linewidth=2)
+        plt.plot(result["T"], result["psi"], label=fr"$\psi(t)$ - {name}", linewidth=2, color=colors[name])
 
-    plt.xlabel("Tiempo [s]")
-    plt.ylabel(r"Rumbo $\psi$ [rad]")
-    plt.title("Seguimiento de referencia")
+    plt.xlabel("Tiempo [s]", fontsize=fontsize_labels)
+    plt.ylabel(r"Rumbo $\psi$ [rad]", fontsize=fontsize_labels)
+    plt.title("Seguimiento de referencia", fontsize=fontsize_title)
     plt.grid(True, alpha=0.3)
-    plt.legend()
+    plt.legend(fontsize=fontsize_legend)
     plt.tight_layout()
 
     if save:
@@ -149,13 +149,13 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
     fig2 = plt.figure(figsize=(10, 4))
 
     for name, result in results.items():
-        plt.plot(result["T"], result["error"], label=fr"$e(t)$ - {name}", linewidth=2)
+        plt.plot(result["T"], result["error"], label=fr"$e(t)$ - {name}", linewidth=2, color=colors[name])
 
-    plt.xlabel("Tiempo [s]")
-    plt.ylabel("Error [rad]")
-    plt.title("Error de seguimiento")
+    plt.xlabel("Tiempo [s]", fontsize=fontsize_labels)
+    plt.ylabel("Error [rad]", fontsize=fontsize_labels)
+    plt.title("Error de seguimiento", fontsize=fontsize_title)
     plt.grid(True, alpha=0.3)
-    plt.legend()
+    plt.legend(fontsize=fontsize_legend)
     plt.tight_layout()
 
     if save:
@@ -166,34 +166,32 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
     else:
         plt.close(fig2)
 
-    # 3) Estados
-    fig3 = plt.figure(figsize=(10, 6))
+    # # 3) Estados
+    fig3, axes = plt.subplots(3, 1, figsize=(10, 6), sharex=True)
 
-    plt.subplot(3, 1, 1)
+    ax1, ax2, ax3 = axes
     for name, result in results.items():
-        plt.plot(result["T"], result["v"], label=fr"$v(t)$ - {name}")
-    plt.ylabel(r"$v$ [m/s]")
-    plt.grid(True, alpha=0.3)
-    plt.legend()
+        ax1.plot(result["T"], result["v"], label=fr"$v(t)$ - {name}", color=colors[name])
+    ax1.set_ylabel(r"$v$ [m/s]", fontsize=fontsize_labels)
+    ax1.grid(True, alpha=0.3)
+    ax1.legend(fontsize=fontsize_legend)
 
-    plt.subplot(3, 1, 2)
     for name, result in results.items():
-        plt.plot(result["T"], result["r_yaw"], label=fr"$r(t)$ - {name}")
-    plt.ylabel(r"$r$ [rad/s]")
-    plt.grid(True, alpha=0.3)
-    plt.legend()
+        ax2.plot(result["T"], result["r_yaw"], label=fr"$r(t)$ - {name}", color=colors[name])
+    ax2.set_ylabel(r"$r$ [rad/s]", fontsize=fontsize_labels)
+    ax2.grid(True, alpha=0.3)
+    ax2.legend(fontsize=fontsize_legend)
 
-    plt.subplot(3, 1, 3)
-    plt.plot(T_ref, psi_ref, "--", label=r"$\psi_{ref}(t)$")
+    ax3.plot(T_ref, psi_ref, "--", label=r"$\psi_{ref}(t)$", color="orange")
     for name, result in results.items():
-        plt.plot(result["T"], result["psi"], label=fr"$\psi(t)$ - {name}")
-    plt.xlabel("Tiempo [s]")
-    plt.ylabel(r"$\psi$ [rad]")
-    plt.grid(True, alpha=0.3)
-    plt.legend()
+        ax3.plot(result["T"], result["psi"], label=fr"$\psi(t)$ - {name}", color=colors[name])
+    ax3.set_xlabel("Tiempo [s]", fontsize=fontsize_labels)
+    ax3.set_ylabel(r"$\psi$ [rad]", fontsize=fontsize_labels)
+    ax3.grid(True, alpha=0.3)
+    ax3.legend(fontsize=fontsize_legend)
 
-    plt.suptitle("Estados del sistema")
-    plt.tight_layout()
+    fig3.suptitle("Estados del sistema", fontsize=fontsize_title)
+    fig3.tight_layout()
 
     if save:
         fig3.savefig(f"{save_dir}/estados.png", dpi=300)
@@ -207,13 +205,13 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
     fig4 = plt.figure(figsize=(10, 4))
 
     for name, result in results.items():
-        plt.plot(result["T"], result["xi"], label=fr"$\xi(t)$ - {name}", linewidth=2)
+        plt.plot(result["T"], result["xi"], label=fr"$\xi(t)$ - {name}", linewidth=2, color=colors[name])
 
-    plt.xlabel("Tiempo [s]")
-    plt.ylabel(r"$\xi$")
-    plt.title("Estado del integrador")
+    plt.xlabel("Tiempo [s]", fontsize=fontsize_labels)
+    plt.ylabel(r"$\xi$", fontsize=fontsize_labels)
+    plt.title("Estado del integrador", fontsize=fontsize_title)
     plt.grid(True, alpha=0.3)
-    plt.legend()
+    plt.legend(fontsize=fontsize_legend)
     plt.tight_layout()
 
     if save:
@@ -228,13 +226,13 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
     fig5 = plt.figure(figsize=(10, 4))
 
     for name, result in results.items():
-        plt.plot(result["T"], result["tau_r"], label=fr"$\tau_r(t)$ - {name}", linewidth=2)
+        plt.plot(result["T"], result["tau_r"], label=fr"$\tau_r(t)$ - {name}", linewidth=2, color=colors[name])
 
-    plt.xlabel("Tiempo [s]")
-    plt.ylabel(r"$\tau_r$")
-    plt.title("Señal de control")
+    plt.xlabel("Tiempo [s]", fontsize=fontsize_labels)
+    plt.ylabel(r"$\tau_r$", fontsize=fontsize_labels)
+    plt.title("Señal de control", fontsize=fontsize_title)
     plt.grid(True, alpha=0.3)
-    plt.legend()
+    plt.legend(fontsize=fontsize_legend)
     plt.tight_layout()
 
     if save:
