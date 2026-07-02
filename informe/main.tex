@@ -1,0 +1,70 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{hyperref}
+
+\geometry{margin=2.5cm}
+\graphicspath{{../plots/}}
+\addto\captionsspanish{\renewcommand{\tablename}{Tabla}}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue
+}
+
+\newcommand{\pendiente}[1]{%
+    \par\smallskip
+    \noindent\fbox{%
+        \begin{minipage}{0.94\linewidth}
+        \textbf{Pendiente para completar:} #1
+        \end{minipage}%
+    }
+    \par\smallskip
+}
+
+\title{Trabajo Práctico Nro. 2\\Control de Rumbo y Reconstrucción de Trayectoria de una Embarcación}
+\author{Nombres completos del grupo}
+\date{IOR442 Sistemas de Control}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+En este trabajo se estudia el control de rumbo de una embarcación navegando con velocidad longitudinal constante $u_0 = 2\,\mathrm{m/s}$. El sistema de control considerado es SISO: la entrada es el momento de control en yaw $\tau_r$ y la salida controlada es el ángulo de rumbo $\psi$.
+
+El informe sigue la estructura de la consigna: primero se diseña un controlador por asignación de polos con acción integral, luego se reconstruye la trayectoria en el plano inercial y finalmente se compara el desempeño contra distintos diseños LQI.
+
+\pendiente{Completar nombres del grupo y, si se desea, agregar una breve descripción del criterio general usado para comparar los controladores.}
+
+\section{Versiones y dependencias}
+
+El código fue ejecutado con las versiones indicadas en la Tabla~\ref{tab:versiones}. Las dependencias también se listan en el archivo \texttt{requirements.txt}.
+
+\input{tables/versiones}
+
+\input{sections/parte_a}
+\input{sections/parte_b}
+\input{sections/parte_c}
+
+\section{Conclusiones}
+
+\pendiente{Redactar una conclusión global: resumir si el controlador por polos cumple el seguimiento, por qué LQI reduce el esfuerzo de control, qué compromiso se eligió y cuáles serían los pasos siguientes si se quisiera controlar posición en el plano.}
+
+\end{document}

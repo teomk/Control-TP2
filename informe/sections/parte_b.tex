@@ -1,0 +1,58 @@
+\section{Parte B - Reconstrucción de trayectoria en el plano}
+
+\subsection{Ecuaciones cinemáticas}
+
+La velocidad en el sistema del cuerpo se escribe como $[u_0\ v]^T$. Para expresarla en el sistema inercial se aplica una rotación de ángulo $\psi$:
+
+\begin{equation}
+\begin{bmatrix}
+\dot{X} \\
+\dot{Y}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\cos\psi & -\sin\psi \\
+\sin\psi & \cos\psi
+\end{bmatrix}
+\begin{bmatrix}
+u_0 \\
+v
+\end{bmatrix}.
+\end{equation}
+
+De esta forma se obtiene
+
+\begin{equation}
+\dot{X} = u_0 \cos(\psi) - v \sin(\psi),
+\qquad
+\dot{Y} = u_0 \sin(\psi) + v \cos(\psi).
+\end{equation}
+
+\subsection{Integración de la trayectoria}
+
+La trayectoria se reconstruye a partir de las señales $v(t)$ y $\psi(t)$ obtenidas en la Parte A, con $X(0)=0$ e $Y(0)=0$. La integración numérica se realiza con la misma grilla temporal de simulación.
+
+\input{tables/parte_b_posicion}
+
+\subsection{Trayectoria obtenida}
+
+La Figura~\ref{fig:parte-b-trayectoria} muestra la trayectoria reconstruida en el plano inercial.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\textwidth]{parteB/trayectoria.png}
+\caption{Trayectoria reconstruida con el controlador de la Parte A.}
+\label{fig:parte-b-trayectoria}
+\end{figure}
+
+\subsection{Efecto de los cambios de referencia}
+
+Los cambios de referencia de rumbo modifican la curvatura de la trayectoria. Cuando $\psi_{ref}=0$, el avance es principalmente longitudinal. Cuando la referencia pasa a $\pi/6$ o $-\pi/6$, la embarcación comienza a desplazarse con componente lateral positiva o negativa, respectivamente. Para $\psi_{ref}=\pi/3$, la pendiente de la trayectoria aumenta.
+
+\pendiente{Revisar y pulir esta explicación con los instantes exactos $t=10\,s$, $t=25\,s$ y $t=40\,s$, conectándola con la figura y con el retardo propio del controlador.}
+
+\subsection{Discusión para el informe}
+
+\pendiente{Completar la discusión pedida por la consigna: posibilidad de considerar $X$ e $Y$ como salidas controladas, consistencia de la trayectoria con los cambios de rumbo, efecto de la velocidad de respuesta, efecto de $v(t)$, suavidad de la trayectoria y limitaciones si se quisiera controlar directamente posición en el plano $XY$.}
+
+\FloatBarrier

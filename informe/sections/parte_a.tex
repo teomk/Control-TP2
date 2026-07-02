@@ -1,0 +1,163 @@
+\section{Parte A - Control de rumbo con asignación de polos}
+
+\subsection{Modelo en espacio de estados}
+
+Con el vector de estados $x = [v\ r\ \psi]^T$, la entrada $u_c = \tau_r$ y la salida $y = \psi$, el modelo lineal puede escribirse como
+
+\begin{equation}
+\dot{x} = A x + B u_c, \qquad y = Cx + Du_c,
+\end{equation}
+
+donde
+
+\begin{equation}
+A =
+\begin{bmatrix}
+-0.25 & -2 & 0 \\
+0.08 & -0.35 & 0 \\
+0 & 1 & 0
+\end{bmatrix},
+\quad
+B =
+\begin{bmatrix}
+0 \\
+0.62 \\
+0
+\end{bmatrix},
+\quad
+C =
+\begin{bmatrix}
+0 & 0 & 1
+\end{bmatrix},
+\quad
+D = 0.
+\end{equation}
+
+\subsection{Controlabilidad del sistema original}
+
+La matriz de controlabilidad del sistema original se define como
+
+\begin{equation}
+\mathcal{C} =
+\begin{bmatrix}
+B & AB & A^2B
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 & -1.2400 & 0.7440 \\
+0.6200 & -0.2170 & -0.0233 \\
+0 & 0.6200 & -0.2170
+\end{bmatrix}.
+\label{eq:controlabilidad-original}
+\end{equation}
+
+Como $\operatorname{rango}(\mathcal{C})=3$, la matriz tiene rango completo e igual a la dimensión del sistema original. Por lo tanto, es posible diseñar un controlador por realimentación completa de estados para el modelo de rumbo.
+
+\subsection{Sistema aumentado con acción integral}
+
+Para eliminar el error estacionario frente a referencias constantes o por tramos se incorpora el estado integral
+
+\begin{equation}
+\dot{\xi} = \psi_{ref} - \psi.
+\end{equation}
+
+El vector aumentado es $x_a = [v\ r\ \psi\ \xi]^T$ y el sistema queda
+
+\begin{equation}
+\dot{x}_a = A_a x_a + B_a \tau_r + E_a \psi_{ref},
+\end{equation}
+
+con
+
+\begin{equation}
+A_a =
+\begin{bmatrix}
+-0.25 & -2 & 0 & 0 \\
+0.08 & -0.35 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & -1 & 0
+\end{bmatrix},
+\quad
+B_a =
+\begin{bmatrix}
+0 \\
+0.62 \\
+0 \\
+0
+\end{bmatrix},
+\quad
+E_a =
+\begin{bmatrix}
+0 \\
+0 \\
+0 \\
+1
+\end{bmatrix}.
+\end{equation}
+
+\subsection{Controlabilidad del sistema aumentado}
+
+La matriz de controlabilidad del sistema aumentado es
+
+\begin{equation}
+\mathcal{C}_a =
+\begin{bmatrix}
+B_a & A_aB_a & A_a^2B_a & A_a^3B_a
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 & -1.2400 & 0.7440 & -0.1395 \\
+0.6200 & -0.2170 & -0.0233 & 0.0677 \\
+0 & 0.6200 & -0.2170 & -0.0233 \\
+0 & 0 & -0.6200 & 0.2170
+\end{bmatrix}.
+\label{eq:controlabilidad-aumentado}
+\end{equation}
+
+Como $\operatorname{rango}(\mathcal{C}_a)=4$, la matriz tiene rango completo e igual a la dimensión del sistema aumentado. Por lo tanto, es posible asignar arbitrariamente los polos del sistema aumentado.
+
+\subsection{Diseño del controlador}
+
+Se utiliza la ley de control
+
+\begin{equation}
+\tau_r = -K_a x_a = -K_x x - k_i \xi,
+\qquad
+K_a = [k_v\ k_r\ k_\psi\ k_i].
+\end{equation}
+
+Primero se eligieron los polos deseados del sistema aumentado y luego se calculó la ganancia $K_a$. Para ello se utilizó la función \texttt{control.place}. Esta función es un wrapper de \texttt{scipy.signal.place\_poles}, que implementa el algoritmo de Tits-Yang para asignación robusta de polos por realimentación de estados.
+
+Los polos asignados y la ganancia obtenida se muestran, en ese orden, en las Tablas~\ref{tab:parte-a-polos} y~\ref{tab:parte-a-ganancias}.
+
+\input{tables/parte_a_ganancias}
+
+\subsection{Simulación de seguimiento}
+
+La simulación se realiza durante $T_f = 60\,\mathrm{s}$ utilizando la referencia por tramos pedida en la consigna. En la Figura~\ref{fig:parte-a-seguimiento} se muestra el seguimiento de rumbo.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.86\textwidth]{parteA/seguimiento.png}
+\caption{Seguimiento de referencia de rumbo para el controlador por asignación de polos.}
+\label{fig:parte-a-seguimiento}
+\end{figure}
+
+\subsection{Error, estados y señal de control}
+
+La Figura~\ref{fig:parte-a-error-estados-control} resume el error de seguimiento, los estados del sistema y la señal de control. Las métricas principales se muestran en la Tabla~\ref{tab:parte-a-metricas}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{parteA/error_estados_control.png}
+\caption{Error de seguimiento, estados y señal de control para la Parte A.}
+\label{fig:parte-a-error-estados-control}
+\end{figure}
+
+\input{tables/parte_a_metricas}
+
+\subsection{Discusión de desempeño}
+
+\pendiente{Discutir si la embarcación sigue la referencia, si el error estacionario es nulo, si la velocidad de respuesta es adecuada, la suavidad de $\tau_r$, los valores máximos requeridos de $\tau_r$, el efecto esperado al mover los polos y las limitaciones físicas del actuador.}
+
+\FloatBarrier
