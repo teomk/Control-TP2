@@ -2,17 +2,18 @@
 \centering
 \caption{Matrices de ponderación evaluadas para el diseño LQI. Se muestra la diagonal de $Q_a$.}
 \label{tab:parte-c-ponderaciones}
-\small
-\begin{tabular}{lrrrrr}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{lrrrrr>{\raggedright\arraybackslash}X}
 \toprule
-Caso & $q_v$ & $q_r$ & $q_\psi$ & $q_\xi$ & $R$ \\
+Caso & $q_v$ & $q_r$ & $q_\psi$ & $q_\xi$ & $R$ & Justificación \\
 \midrule
-MUY\_AGRESIVO & 1 & 1 & 80 & 150 & 0.5 \\
-AGRESIVO & 1 & 1 & 50 & 100 & 1 \\
-INTERMEDIO & 1 & 2 & 30 & 80 & 10 \\
-V\_PENALIZADO & 10 & 5 & 30 & 80 & 10 \\
-SUAVE & 1 & 5 & 20 & 50 & 50 \\
-CONTROL\_ECONOMICO & 1 & 5 & 10 & 20 & 200 \\
+MUY\_AGRESIVO & 1 & 1 & 80 & 150 & 0.5 & Prioriza fuertemente el seguimiento y la acción integral, con baja penalización del control. \\
+AGRESIVO & 1 & 1 & 50 & 100 & 1 & Mantiene una respuesta rápida, pero con menor exigencia que el caso muy agresivo. \\
+INTERMEDIO & 1 & 2 & 30 & 80 & 10 & Busca un compromiso entre seguimiento, suavidad y esfuerzo de control. \\
+V\_PENALIZADO & 10 & 5 & 30 & 80 & 10 & Aumenta los pesos sobre $v$ y $r$ para limitar velocidad lateral y guiñada. \\
+SUAVE & 1 & 5 & 20 & 50 & 50 & Penaliza más el control y reduce la agresividad de la respuesta. \\
+CONTROL\_ECONOMICO & 1 & 5 & 10 & 20 & 200 & Prioriza minimizar el esfuerzo de control, aceptando una respuesta más lenta. \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}

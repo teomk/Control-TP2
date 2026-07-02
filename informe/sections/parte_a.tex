@@ -134,7 +134,19 @@ Los polos asignados y la ganancia obtenida se muestran, en ese orden, en las Tab
 
 \subsection{Simulación de seguimiento}
 
-La simulación se realiza durante $T_f = 60\,\mathrm{s}$ utilizando la referencia por tramos pedida en la consigna. En la Figura~\ref{fig:parte-a-seguimiento} se muestra el seguimiento de rumbo.
+La simulación se realiza durante $T_f = 60\,\mathrm{s}$ utilizando la referencia por tramos pedida en la consigna:
+
+\begin{equation}
+\psi_{ref}(t) =
+\begin{cases}
+0, & t < 10\,\mathrm{s}, \\
+\pi/6, & 10\,\mathrm{s} \leq t < 25\,\mathrm{s}, \\
+-\pi/6, & 25\,\mathrm{s} \leq t < 40\,\mathrm{s}, \\
+\pi/3, & 40\,\mathrm{s} \leq t \leq 60\,\mathrm{s}.
+\end{cases}
+\end{equation}
+
+En la Figura~\ref{fig:parte-a-seguimiento} se muestra el seguimiento de rumbo.
 
 \begin{figure}[H]
 \centering
@@ -158,6 +170,15 @@ La Figura~\ref{fig:parte-a-error-estados-control} resume el error de seguimiento
 
 \subsection{Discusión de desempeño}
 
-\pendiente{Discutir si la embarcación sigue la referencia, si el error estacionario es nulo, si la velocidad de respuesta es adecuada, la suavidad de $\tau_r$, los valores máximos requeridos de $\tau_r$, el efecto esperado al mover los polos y las limitaciones físicas del actuador.}
+De los resultados obtenidos se observa que:
+
+\begin{itemize}
+    \item La embarcación logra seguir la referencia de rumbo por tramos. En cada cambio de consigna aparece un transitorio, pero la salida converge al nuevo valor de referencia.
+    \item El error estacionario es prácticamente nulo, lo cual es consistente con la incorporación del integrador del error.
+    \item La respuesta es rápida debido a la ubicación de los polos en $[-1.5,\,-2.0,\,-2.5,\,-3.0]$.
+    \item El costo de esa rapidez es una señal de control elevada, con $\max |\tau_r| = 18.5989$.
+    \item La señal de control presenta picos importantes en los instantes de cambio de referencia. Esto puede ser problemático si el actuador real tiene límites de saturación o restricciones de potencia.
+    \item Si los polos se ubicaran más a la izquierda, la respuesta sería más rápida, pero aumentaría el esfuerzo de control y podrían aparecer transitorios más bruscos. Si se ubicaran más cerca del origen, la respuesta sería más lenta y suave, con menor exigencia sobre el actuador.
+\end{itemize}
 
 \FloatBarrier

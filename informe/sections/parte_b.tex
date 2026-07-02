@@ -47,12 +47,12 @@ La Figura~\ref{fig:parte-b-trayectoria} muestra la trayectoria reconstruida en e
 
 \subsection{Efecto de los cambios de referencia}
 
-Los cambios de referencia de rumbo modifican la curvatura de la trayectoria. Cuando $\psi_{ref}=0$, el avance es principalmente longitudinal. Cuando la referencia pasa a $\pi/6$ o $-\pi/6$, la embarcación comienza a desplazarse con componente lateral positiva o negativa, respectivamente. Para $\psi_{ref}=\pi/3$, la pendiente de la trayectoria aumenta.
-
-\pendiente{Revisar y pulir esta explicación con los instantes exactos $t=10\,s$, $t=25\,s$ y $t=40\,s$, conectándola con la figura y con el retardo propio del controlador.}
+Los cambios de referencia de rumbo modifican la curvatura de la trayectoria. Para $\psi_{ref}=0$, el avance es principalmente longitudinal. En $t=10\,\mathrm{s}$, la referencia pasa a $\pi/6$ y la trayectoria comienza a curvarse hacia valores positivos de $Y$. En $t=25\,\mathrm{s}$, la referencia cambia a $-\pi/6$, por lo que la curvatura se invierte. Finalmente, en $t=40\,\mathrm{s}$, el salto a $\pi/3$ genera una pendiente mayor en el plano.
 
 \subsection{Discusión para el informe}
 
-\pendiente{Completar la discusión pedida por la consigna: posibilidad de considerar $X$ e $Y$ como salidas controladas, consistencia de la trayectoria con los cambios de rumbo, efecto de la velocidad de respuesta, efecto de $v(t)$, suavidad de la trayectoria y limitaciones si se quisiera controlar directamente posición en el plano $XY$.}
+La trayectoria reconstruida es consistente con los cambios de rumbo pedidos: cada salto de referencia se traduce en un cambio de curvatura en el plano. Sin embargo, $X$ e $Y$ no son salidas controladas; solamente se calculan integrando las ecuaciones cinemáticas a partir de $v(t)$ y $\psi(t)$. Por este motivo, el controlador no corrige errores de posición ni intenta seguir una trayectoria geométrica prefijada.
+
+La trayectoria perfecta utilizada como referencia cinemática no es físicamente alcanzable con este modelo, ya que supone cambios instantáneos de rumbo en los instantes de conmutación. En el sistema realimentado, $\psi(t)$ necesita un tiempo finito para alcanzar cada nuevo valor de referencia. Además, la velocidad lateral $v(t)$ hace que la dirección instantánea de movimiento no coincida exactamente con el ángulo de rumbo. Si se quisiera controlar directamente la posición en el plano $XY$, sería necesario reformular el problema incorporando realimentación de posición y tratando la cinemática no lineal del sistema.
 
 \FloatBarrier

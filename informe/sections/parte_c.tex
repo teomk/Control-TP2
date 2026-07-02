@@ -26,8 +26,6 @@ La Tabla~\ref{tab:parte-c-ponderaciones} resume los seis casos evaluados. Se inc
 
 \input{tables/parte_c_ponderaciones}
 
-\pendiente{Justificar con texto cada familia de pesos: por qué aumentar $q_\psi$ y $q_\xi$ acelera el seguimiento, por qué aumentar $R$ reduce esfuerzo de control y por qué el caso V\_PENALIZADO aumenta los pesos sobre $v$ y $r$.}
-
 \subsection{Ganancias, polos y simulaciones}
 
 Las ganancias y polos resultantes se muestran en las Tablas~\ref{tab:parte-c-ganancias} y~\ref{tab:parte-c-polos}. La Figura~\ref{fig:parte-c-polos} muestra la ubicación de polos en el plano complejo.
@@ -41,6 +39,8 @@ Las ganancias y polos resultantes se muestran en las Tablas~\ref{tab:parte-c-gan
 \caption{Polos de lazo cerrado para los controladores LQI evaluados.}
 \label{fig:parte-c-polos}
 \end{figure}
+
+A medida que el caso se vuelve más agresivo, el par complejo dominante se aleja del eje imaginario y aumenta su parte real negativa. Esto se traduce en una respuesta más rápida. También se observa que uno de los polos reales queda prácticamente fijo cerca de $-0.25$ para varios diseños. Ese polo está asociado a una dinámica del sistema que el cambio de ponderaciones modifica poco en comparación con el par dominante y con el polo ligado al integrador.
 
 \subsection{Comparación entre controladores LQI}
 
@@ -86,6 +86,10 @@ Las Figuras~\ref{fig:parte-c-lqi-seguimiento-error}, \ref{fig:parte-c-lqi-contro
 \caption{Estados del sistema para los casos LQI.}
 \label{fig:parte-c-lqi-estados}
 \end{figure}
+
+En el seguimiento de referencia se observa que los casos MUY\_AGRESIVO y AGRESIVO son los más rápidos y no presentan sobrepicos importantes respecto de la referencia. Los casos menos agresivos se vuelven progresivamente más lentos a medida que sus polos dominantes se acercan al eje imaginario. En particular, los diseños INTERMEDIO, V\_PENALIZADO, SUAVE y CONTROL\_ECONOMICO muestran sobrepicos que traspasan levemente la referencia luego de los cambios de consigna.
+
+La señal de control permite distinguir mejor los compromisos. MUY\_AGRESIVO y AGRESIVO tienen seguimientos bastante similares, pero el caso MUY\_AGRESIVO requiere un salto considerablemente mayor de control. Por otro lado, el caso INTERMEDIO conserva una respuesta visualmente cercana a los casos agresivos, salvo por un mayor sobrepico, pero reduce de forma marcada el esfuerzo de control. En términos de máximo valor de $\tau_r$, el caso INTERMEDIO requiere menos de la mitad del esfuerzo del caso AGRESIVO y bastante menos que el caso MUY\_AGRESIVO.
 
 \subsection{Comparación con la Parte A}
 
@@ -134,7 +138,7 @@ La comparación entre el controlador por asignación de polos y los controladore
 \label{fig:parte-c-comparacion-estados}
 \end{figure}
 
-\pendiente{Comentar las diferencias principales: LQI reduce de forma importante $\max|\tau_r|$ y RMS de control respecto de Parte A, pero modifica la trayectoria final y aumenta el compromiso entre precisión temporal, suavidad y esfuerzo.}
+En comparación con la asignación de polos de la Parte A, los controladores LQI reducen de forma importante el esfuerzo de control. Por ejemplo, el caso INTERMEDIO alcanza $\max|\tau_r|=1.314$, frente a $\max|\tau_r|=18.599$ en la Parte A. También disminuye el RMS de la señal de control. La contracara es que el seguimiento resulta menos agresivo: la respuesta de rumbo tarda más en alcanzar cada nuevo valor de referencia y aparecen diferencias más visibles durante los transitorios. El LQI, por lo tanto, introduce explícitamente un compromiso entre precisión temporal, suavidad y esfuerzo.
 
 \subsection{Reconstrucción de trayectoria para LQI}
 
@@ -160,10 +164,14 @@ Para la comparación final se utiliza el caso INTERMEDIO como controlador LQI re
 
 \input{tables/parte_c_trayectorias}
 
-\pendiente{Comentar por qué las trayectorias LQI terminan más lejos de la trayectoria ideal que Parte A: el criterio LQI penaliza esfuerzo y suaviza la respuesta de rumbo, por lo que la embarcación recorre más distancia mientras converge a cada nueva referencia.}
+Las trayectorias LQI terminan más lejos de la trayectoria ideal que la trayectoria obtenida en la Parte A porque el criterio LQI penaliza el esfuerzo de control y suaviza la respuesta de rumbo. Durante cada transición, la embarcación continúa avanzando mientras $\psi(t)$ converge al nuevo valor de referencia. Esa demora acumulada modifica la posición final. Entre los casos LQI, la mayoría de las trayectorias terminan relativamente cerca unas de otras; las mayores diferencias aparecen en los diseños más lentos, especialmente CONTROL\_ECONOMICO.
+
+Con estos resultados, el caso INTERMEDIO se elige como controlador representativo de la Parte C. Su seguimiento es parecido al de los casos agresivos, pero con una señal de control mucho menor. Además, en la reconstrucción de trayectoria no se aleja significativamente del grupo principal de diseños LQI. Por eso constituye un compromiso razonable entre desempeño de seguimiento, esfuerzo de control y trayectoria resultante.
 
 \subsection{Ventajas y desventajas de asignación de polos y LQI}
 
-\pendiente{Discutir ventajas y desventajas. Asignación de polos: diseño directo de dinámica deseada, pero puede exigir control alto y no optimiza esfuerzo. LQI: permite incorporar compromisos mediante $Q_a$ y $R$, reduce esfuerzo, pero requiere seleccionar pesos y la interpretación del resultado puede ser menos directa.}
+La asignación de polos tiene como ventaja principal que permite imponer de forma directa la dinámica deseada del sistema aumentado. Es un método claro para fijar la velocidad de respuesta y garantizar estabilidad si el sistema es controlable. Sin embargo, no optimiza el esfuerzo de control y puede producir señales de control muy elevadas, como se observa en la Parte A.
+
+El LQI, en cambio, permite incorporar compromisos de diseño mediante $Q_a$ y $R$. Esto hace posible reducir el esfuerzo de control y ajustar la respuesta de manera más gradual. Su desventaja es que la elección de pesos no es única y requiere un proceso de diseño iterativo: modificar $Q_a$ y $R$ cambia simultáneamente seguimiento, esfuerzo, polos y trayectoria. En este problema, LQI resulta conveniente cuando se busca cuidar la señal de control, mientras que la asignación de polos es útil si se prioriza una respuesta rápida y directa.
 
 \FloatBarrier

@@ -13,6 +13,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{placeins}
+\usepackage{tabularx}
 \usepackage{hyperref}
 
 \geometry{margin=2.5cm}
@@ -47,11 +48,11 @@
 
 \section{Introducción}
 
-En este trabajo se estudia el control de rumbo de una embarcación navegando con velocidad longitudinal constante $u_0 = 2\,\mathrm{m/s}$. El sistema de control considerado es SISO: la entrada es el momento de control en yaw $\tau_r$ y la salida controlada es el ángulo de rumbo $\psi$.
+En este trabajo se estudia el control de rumbo de una embarcación navegando con velocidad longitudinal constante $u_0 = 2\,\mathrm{m/s}$. Mantener o modificar el rumbo de manera controlada es un problema importante en vehículos marítimos, ya que permite compensar perturbaciones y ejecutar maniobras de navegación. Para concentrar el análisis en la dinámica lateral-direccional, se considera un modelo linealizado donde los estados son la velocidad lateral $v$, la velocidad angular de guiñada $r$ y el ángulo de rumbo $\psi$.
 
-El informe sigue la estructura de la consigna: primero se diseña un controlador por asignación de polos con acción integral, luego se reconstruye la trayectoria en el plano inercial y finalmente se compara el desempeño contra distintos diseños LQI.
+El sistema de control considerado es SISO: la entrada es el momento de control en yaw $\tau_r$ y la salida controlada es el ángulo de rumbo $\psi$. Primero se diseña un controlador por asignación de polos con acción integral, luego se reconstruye la trayectoria en el plano inercial y finalmente se compara el desempeño contra distintos diseños LQI.
 
-\pendiente{Completar nombres del grupo y, si se desea, agregar una breve descripción del criterio general usado para comparar los controladores.}
+La comparación entre controladores se realiza considerando el seguimiento de la referencia, el error estacionario, las métricas integrales de error, el esfuerzo de control requerido y la trayectoria reconstruida en el plano $XY$. En particular, se busca identificar el compromiso entre una respuesta rápida y precisa, y una señal de control razonable para un actuador físico.
 
 \section{Versiones y dependencias}
 
@@ -65,6 +66,8 @@ El código fue ejecutado con las versiones indicadas en la Tabla~\ref{tab:versio
 
 \section{Conclusiones}
 
-\pendiente{Redactar una conclusión global: resumir si el controlador por polos cumple el seguimiento, por qué LQI reduce el esfuerzo de control, qué compromiso se eligió y cuáles serían los pasos siguientes si se quisiera controlar posición en el plano.}
+El controlador por asignación de polos cumple el objetivo principal de seguimiento de rumbo y, gracias a la acción integral, elimina el error estacionario frente a referencias constantes por tramos. Sin embargo, la respuesta rápida obtenida requiere valores elevados de señal de control. En cambio, el diseño LQI permite reducir de forma importante el esfuerzo de control al incorporar explícitamente ese costo mediante la matriz $R$.
+
+Entre los casos LQI evaluados, el caso INTERMEDIO representa un compromiso razonable: conserva un seguimiento similar al de los diseños más agresivos, pero con una señal de control considerablemente menor. La reconstrucción de trayectoria muestra que este compromiso tiene un costo en posición final, ya que una respuesta de rumbo más suave acumula desvíos durante las transiciones. Si se quisiera controlar directamente la posición en el plano, sería necesario reformular el problema incorporando $X$ e $Y$ como variables controladas y considerando la naturaleza no lineal de la cinemática.
 
 \end{document}
