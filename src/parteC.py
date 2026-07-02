@@ -5,9 +5,12 @@ import os
 import pandas as pd
 
 colors = {
+    "MUY_AGRESIVO": "tab:pink",
     "AGRESIVO": "red",
     "INTERMEDIO": "green",
+    "V_PENALIZADO": "tab:cyan",
     "SUAVE": "blue",
+    "CONTROL_ECONOMICO": "tab:brown",
     "PARTE A": "black"
 }
 
@@ -60,11 +63,11 @@ def plot_poles(controllers, save=False, save_dir='plots'):
     plt.ylabel("Imaginary")
     plt.title("Polos de los controladores LQI")
     plt.grid(True, alpha=0.3)
-    plt.legend()
+    plt.legend(loc='center left', bbox_to_anchor=(1.02, 0.5))
     plt.tight_layout()
 
     if save:
-        fig.savefig(f"{save_dir}/polos.png", dpi=300)
+        fig.savefig(f"{save_dir}/polos.png", dpi=300, bbox_inches='tight')
 
     plt.show()
 
@@ -134,11 +137,11 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
     plt.ylabel(r"Rumbo $\psi$ [rad]", fontsize=fontsize_labels)
     plt.title("Seguimiento de referencia", fontsize=fontsize_title)
     plt.grid(True, alpha=0.3)
-    plt.legend(fontsize=fontsize_legend)
+    plt.legend(fontsize=fontsize_legend, loc='center left', bbox_to_anchor=(1.02, 0.5))
     plt.tight_layout()
 
     if save:
-        fig1.savefig(f"{save_dir}/seguimiento.png", dpi=300)
+        fig1.savefig(f"{save_dir}/seguimiento.png", dpi=300, bbox_inches='tight')
 
     if show:
         plt.show()
@@ -155,11 +158,11 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
     plt.ylabel("Error [rad]", fontsize=fontsize_labels)
     plt.title("Error de seguimiento", fontsize=fontsize_title)
     plt.grid(True, alpha=0.3)
-    plt.legend(fontsize=fontsize_legend)
+    plt.legend(fontsize=fontsize_legend, loc='center left', bbox_to_anchor=(1.02, 0.5))
     plt.tight_layout()
 
     if save:
-        fig2.savefig(f"{save_dir}/error.png", dpi=300)
+        fig2.savefig(f"{save_dir}/error.png", dpi=300, bbox_inches='tight')
 
     if show:
         plt.show()
@@ -174,13 +177,13 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
         ax1.plot(result["T"], result["v"], label=fr"$v(t)$ - {name}", color=colors[name])
     ax1.set_ylabel(r"$v$ [m/s]", fontsize=fontsize_labels)
     ax1.grid(True, alpha=0.3)
-    ax1.legend(fontsize=fontsize_legend)
+    ax1.legend(fontsize=fontsize_legend, loc='center left', bbox_to_anchor=(1.02, 0.5))
 
     for name, result in results.items():
         ax2.plot(result["T"], result["r_yaw"], label=fr"$r(t)$ - {name}", color=colors[name])
     ax2.set_ylabel(r"$r$ [rad/s]", fontsize=fontsize_labels)
     ax2.grid(True, alpha=0.3)
-    ax2.legend(fontsize=fontsize_legend)
+    ax2.legend(fontsize=fontsize_legend, loc='center left', bbox_to_anchor=(1.02, 0.5))
 
     ax3.plot(T_ref, psi_ref, "--", label=r"$\psi_{ref}(t)$", color="orange")
     for name, result in results.items():
@@ -188,13 +191,13 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
     ax3.set_xlabel("Tiempo [s]", fontsize=fontsize_labels)
     ax3.set_ylabel(r"$\psi$ [rad]", fontsize=fontsize_labels)
     ax3.grid(True, alpha=0.3)
-    ax3.legend(fontsize=fontsize_legend)
+    ax3.legend(fontsize=fontsize_legend, loc='center left', bbox_to_anchor=(1.02, 0.5))
 
     fig3.suptitle("Estados del sistema", fontsize=fontsize_title)
     fig3.tight_layout()
 
     if save:
-        fig3.savefig(f"{save_dir}/estados.png", dpi=300)
+        fig3.savefig(f"{save_dir}/estados.png", dpi=300, bbox_inches='tight')
 
     if show:
         plt.show()
@@ -211,11 +214,11 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
     plt.ylabel(r"$\xi$", fontsize=fontsize_labels)
     plt.title("Estado del integrador", fontsize=fontsize_title)
     plt.grid(True, alpha=0.3)
-    plt.legend(fontsize=fontsize_legend)
+    plt.legend(fontsize=fontsize_legend, loc='center left', bbox_to_anchor=(1.02, 0.5))
     plt.tight_layout()
 
     if save:
-        fig4.savefig(f"{save_dir}/integrador.png", dpi=300)
+        fig4.savefig(f"{save_dir}/integrador.png", dpi=300, bbox_inches='tight')
 
     if show:
         plt.show()
@@ -232,11 +235,11 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
     plt.ylabel(r"$\tau_r$", fontsize=fontsize_labels)
     plt.title("Señal de control", fontsize=fontsize_title)
     plt.grid(True, alpha=0.3)
-    plt.legend(fontsize=fontsize_legend)
+    plt.legend(fontsize=fontsize_legend, loc='center left', bbox_to_anchor=(1.02, 0.5))
     plt.tight_layout()
 
     if save:
-        fig5.savefig(f"{save_dir}/control.png", dpi=300)
+        fig5.savefig(f"{save_dir}/control.png", dpi=300, bbox_inches='tight')
 
     if show:
         plt.show()
