@@ -61,7 +61,6 @@ def plot_poles(controllers, save=False, save_dir='plots'):
     plt.axvline(0, color='black', lw=0.5)
     plt.xlabel("Real")
     plt.ylabel("Imaginary")
-    plt.title("Polos de los controladores LQI")
     plt.grid(True, alpha=0.3)
     plt.legend(loc='center left', bbox_to_anchor=(1.02, 0.5))
     plt.tight_layout()
@@ -135,7 +134,6 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
 
     plt.xlabel("Tiempo [s]", fontsize=fontsize_labels)
     plt.ylabel(r"Rumbo $\psi$ [rad]", fontsize=fontsize_labels)
-    plt.title("Seguimiento de referencia", fontsize=fontsize_title)
     plt.grid(True, alpha=0.3)
     plt.legend(fontsize=fontsize_legend, loc='center left', bbox_to_anchor=(1.02, 0.5))
     plt.tight_layout()
@@ -156,7 +154,6 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
 
     plt.xlabel("Tiempo [s]", fontsize=fontsize_labels)
     plt.ylabel("Error [rad]", fontsize=fontsize_labels)
-    plt.title("Error de seguimiento", fontsize=fontsize_title)
     plt.grid(True, alpha=0.3)
     plt.legend(fontsize=fontsize_legend, loc='center left', bbox_to_anchor=(1.02, 0.5))
     plt.tight_layout()
@@ -193,7 +190,6 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
     ax3.grid(True, alpha=0.3)
     ax3.legend(fontsize=fontsize_legend, loc='center left', bbox_to_anchor=(1.02, 0.5))
 
-    fig3.suptitle("Estados del sistema", fontsize=fontsize_title)
     fig3.tight_layout()
 
     if save:
@@ -212,7 +208,6 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
 
     plt.xlabel("Tiempo [s]", fontsize=fontsize_labels)
     plt.ylabel(r"$\xi$", fontsize=fontsize_labels)
-    plt.title("Estado del integrador", fontsize=fontsize_title)
     plt.grid(True, alpha=0.3)
     plt.legend(fontsize=fontsize_legend, loc='center left', bbox_to_anchor=(1.02, 0.5))
     plt.tight_layout()
@@ -233,7 +228,6 @@ def plot_results(results, show=True, save=False, save_dir='plots'):
 
     plt.xlabel("Tiempo [s]", fontsize=fontsize_labels)
     plt.ylabel(r"$\tau_r$", fontsize=fontsize_labels)
-    plt.title("Señal de control", fontsize=fontsize_title)
     plt.grid(True, alpha=0.3)
     plt.legend(fontsize=fontsize_legend, loc='center left', bbox_to_anchor=(1.02, 0.5))
     plt.tight_layout()

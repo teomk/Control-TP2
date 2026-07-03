@@ -166,6 +166,8 @@ La Figura~\ref{fig:parte-a-error-estados-control} resume el error de seguimiento
 \label{fig:parte-a-error-estados-control}
 \end{figure}
 
+Para caracterizar el desempeño se utilizan las métricas IAE (\textit{integral absolute error}), ISE (\textit{integral squared error}) y RMS (\textit{root mean square}) de la señal de control. En este caso se usa RMS porque se mide la magnitud media de $\tau_r(t)$; si se aplicara esta misma idea al error de seguimiento, correspondería hablar de RMSE.
+
 \input{tables/parte_a_metricas}
 
 \subsection{Discusiones}
@@ -184,5 +186,4 @@ Se puede observar en la figura~\ref{fig:parte-a-seguimiento-comparacion} que una
 En la práctica, conviene elegir polos que resulten en una respuesta lo suficientemente veloz y suave, sin exigir al actuador por sobre su límite. Para este caso no se conocen esos límites, pero se considera que el ejemplo graficado en naranja es un buen punto medio.
 
 Para definir la velocidad ideal, en el caso del barco, también sería necesario considerar que movimentos demasiado bruscos podrían desestabilizar la embarcación.
-
 \FloatBarrier

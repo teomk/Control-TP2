@@ -44,40 +44,34 @@ A medida que el caso se vuelve más agresivo, el par complejo dominante se aleja
 
 \subsection{Comparación entre controladores LQI}
 
-Las Figuras~\ref{fig:parte-c-lqi-seguimiento-error}, \ref{fig:parte-c-lqi-control-integrador} y~\ref{fig:parte-c-lqi-estados} muestran el desempeño de los seis controladores LQI frente a la misma referencia de rumbo.
+Las Figuras~\ref{fig:parte-c-lqi-seguimiento}, \ref{fig:parte-c-lqi-error}, \ref{fig:parte-c-lqi-control}, \ref{fig:parte-c-lqi-integrador} y~\ref{fig:parte-c-lqi-estados} muestran el desempeño de los seis controladores LQI frente a la misma referencia de rumbo.
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{0.86\textwidth}
-\centering
-\includegraphics[width=\textwidth]{parteC/lqi/seguimiento.png}
-\caption{Seguimiento}
-\end{subfigure}
-\par\medskip
-\begin{subfigure}{0.86\textwidth}
-\centering
-\includegraphics[width=\textwidth]{parteC/lqi/error.png}
-\caption{Error}
-\end{subfigure}
-\caption{Seguimiento y error para los casos LQI.}
-\label{fig:parte-c-lqi-seguimiento-error}
+\includegraphics[width=0.92\textwidth]{parteC/lqi/seguimiento.png}
+\caption{Seguimiento de referencia para los casos LQI.}
+\label{fig:parte-c-lqi-seguimiento}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{0.86\textwidth}
+\includegraphics[width=0.92\textwidth]{parteC/lqi/error.png}
+\caption{Error de seguimiento para los casos LQI.}
+\label{fig:parte-c-lqi-error}
+\end{figure}
+
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{parteC/lqi/control.png}
-\caption{Control}
-\end{subfigure}
-\par\medskip
-\begin{subfigure}{0.86\textwidth}
+\includegraphics[width=0.92\textwidth]{parteC/lqi/control.png}
+\caption{Señal de control para los casos LQI.}
+\label{fig:parte-c-lqi-control}
+\end{figure}
+
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{parteC/lqi/integrador.png}
-\caption{Integrador}
-\end{subfigure}
-\caption{Señal de control e integrador para los casos LQI.}
-\label{fig:parte-c-lqi-control-integrador}
+\includegraphics[width=0.92\textwidth]{parteC/lqi/integrador.png}
+\caption{Estado del integrador para los casos LQI.}
+\label{fig:parte-c-lqi-integrador}
 \end{figure}
 
 \begin{figure}[H]
@@ -93,42 +87,36 @@ La señal de control permite distinguir mejor los compromisos. MUY\_AGRESIVO y A
 
 \subsection{Comparación con la Parte A}
 
-La comparación entre el controlador por asignación de polos y los controladores LQI se resume en la Tabla~\ref{tab:parte-c-metricas}. Las Figuras~\ref{fig:parte-c-comparacion-seguimiento-error}, \ref{fig:parte-c-comparacion-control-integrador} y~\ref{fig:parte-c-comparacion-estados} muestran las curvas temporales correspondientes.
+La comparación entre el controlador por asignación de polos y los controladores LQI se resume en la Tabla~\ref{tab:parte-c-metricas}. Las Figuras~\ref{fig:parte-c-comparacion-seguimiento}, \ref{fig:parte-c-comparacion-error}, \ref{fig:parte-c-comparacion-control}, \ref{fig:parte-c-comparacion-integrador} y~\ref{fig:parte-c-comparacion-estados} muestran las curvas temporales correspondientes.
 
 \input{tables/parte_c_metricas}
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{0.86\textwidth}
-\centering
-\includegraphics[width=\textwidth]{parteC/comparacion/seguimiento.png}
-\caption{Seguimiento}
-\end{subfigure}
-\par\medskip
-\begin{subfigure}{0.86\textwidth}
-\centering
-\includegraphics[width=\textwidth]{parteC/comparacion/error.png}
-\caption{Error}
-\end{subfigure}
-\caption{Seguimiento y error en la comparación entre Parte A y LQI.}
-\label{fig:parte-c-comparacion-seguimiento-error}
+\includegraphics[width=0.92\textwidth]{parteC/comparacion/seguimiento.png}
+\caption{Seguimiento de referencia en la comparación entre Parte A y LQI.}
+\label{fig:parte-c-comparacion-seguimiento}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}{0.86\textwidth}
+\includegraphics[width=0.92\textwidth]{parteC/comparacion/error.png}
+\caption{Error de seguimiento en la comparación entre Parte A y LQI.}
+\label{fig:parte-c-comparacion-error}
+\end{figure}
+
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{parteC/comparacion/control.png}
-\caption{Control}
-\end{subfigure}
-\par\medskip
-\begin{subfigure}{0.86\textwidth}
+\includegraphics[width=0.92\textwidth]{parteC/comparacion/control.png}
+\caption{Señal de control en la comparación entre Parte A y LQI.}
+\label{fig:parte-c-comparacion-control}
+\end{figure}
+
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{parteC/comparacion/integrador.png}
-\caption{Integrador}
-\end{subfigure}
-\caption{Señal de control e integrador en la comparación entre Parte A y LQI.}
-\label{fig:parte-c-comparacion-control-integrador}
+\includegraphics[width=0.92\textwidth]{parteC/comparacion/integrador.png}
+\caption{Estado del integrador en la comparación entre Parte A y LQI.}
+\label{fig:parte-c-comparacion-integrador}
 \end{figure}
 
 \begin{figure}[H]
@@ -138,7 +126,7 @@ La comparación entre el controlador por asignación de polos y los controladore
 \label{fig:parte-c-comparacion-estados}
 \end{figure}
 
-En comparación con la asignación de polos de la Parte A, los controladores LQI reducen de forma importante el esfuerzo de control. Por ejemplo, el caso INTERMEDIO alcanza $\max|\tau_r|=1.314$, frente a $\max|\tau_r|=18.599$ en la Parte A. También disminuye el RMS de la señal de control. La contracara es que el seguimiento resulta menos agresivo: la respuesta de rumbo tarda más en alcanzar cada nuevo valor de referencia y aparecen diferencias más visibles durante los transitorios. El LQI, por lo tanto, introduce explícitamente un compromiso entre precisión temporal, suavidad y esfuerzo.
+En comparación con la asignación de polos de la Parte A, los controladores LQI reducen de forma importante el esfuerzo de control. Por ejemplo, el caso INTERMEDIO alcanza $\max|\tau_r|=1.314$, frente a $\max|\tau_r|=18.599$ en la Parte A. También disminuye el RMS de la señal de control. Observando únicamente las curvas temporales de rumbo, la Parte A parece converger algo más rápido en algunos cambios de referencia, pero lo hace con sobrepicos y transitorios mucho más agresivos. El caso INTERMEDIO, en cambio, resulta más lento pero menos errático y con una acción de control considerablemente menor. Desde esta perspectiva temporal, el LQI intermedio aparece como una opción más razonable si se busca cuidar el actuador. El costo de esa menor agresividad se analiza en la reconstrucción de trayectorias de la sección siguiente.
 
 \subsection{Reconstrucción de trayectoria para LQI}
 
@@ -153,25 +141,25 @@ Antes de elegir un caso representativo, se comparan las trayectorias reconstruid
 
 \subsection{Trayectorias Parte A y Parte C}
 
-Para la comparación final se utiliza el caso INTERMEDIO como controlador LQI representativo. La Figura~\ref{fig:parte-c-trayectoria-comparacion} muestra la trayectoria antes y después de reemplazar el controlador por el LQI seleccionado. La Tabla~\ref{tab:parte-c-trayectorias} resume las posiciones finales.
+La Tabla~\ref{tab:parte-c-trayectorias} resume las posiciones finales reconstruidas y la distancia respecto de la trayectoria ideal. Allí se observa que la Parte A termina más cerca de la trayectoria perfecta que todos los casos LQI. Esto se debe a que su respuesta de rumbo es más agresiva y rápida, lo que ayuda a respetar más fielmente los cambios de dirección esperados en el plano $X,Y$.
+
+\input{tables/parte_c_trayectorias}
+
+Entre los controladores LQI, la mayoría de las trayectorias termina relativamente cerca una de otra; las diferencias más claras aparecen en los diseños más lentos, especialmente CONTROL\_ECONOMICO. El caso INTERMEDIO queda dentro del grupo principal de trayectorias LQI: no es el más cercano a la trayectoria ideal, pero su posición final es similar a la de los casos más agresivos. Al mismo tiempo, requiere mucho menos esfuerzo de control que MUY\_AGRESIVO y AGRESIVO. Por ese motivo se elige como controlador representativo de la Parte C.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.86\textwidth]{parteC/comparacion/trayectoria_parteA_vs_lqi_intermedio.png}
+\includegraphics[width=0.88\textwidth]{parteC/comparacion/trayectoria_parteA_vs_lqi_intermedio.png}
 \caption{Comparación de trayectorias entre Parte A, LQI intermedio y trayectoria ideal.}
 \label{fig:parte-c-trayectoria-comparacion}
 \end{figure}
 
-\input{tables/parte_c_trayectorias}
-
-Las trayectorias LQI terminan más lejos de la trayectoria ideal que la trayectoria obtenida en la Parte A porque el criterio LQI penaliza el esfuerzo de control y suaviza la respuesta de rumbo. Durante cada transición, la embarcación continúa avanzando mientras $\psi(t)$ converge al nuevo valor de referencia. Esa demora acumulada modifica la posición final. Entre los casos LQI, la mayoría de las trayectorias terminan relativamente cerca unas de otras; las mayores diferencias aparecen en los diseños más lentos, especialmente CONTROL\_ECONOMICO.
-
-Con estos resultados, el caso INTERMEDIO se elige como controlador representativo de la Parte C. Su seguimiento es parecido al de los casos agresivos, pero con una señal de control mucho menor. Además, en la reconstrucción de trayectoria no se aleja significativamente del grupo principal de diseños LQI. Por eso constituye un compromiso razonable entre desempeño de seguimiento, esfuerzo de control y trayectoria resultante.
+La Figura~\ref{fig:parte-c-trayectoria-comparacion} muestra la diferencia entre ambas alternativas. El LQI intermedio reduce fuertemente el esfuerzo de control, pero su menor rapidez de convergencia hace que la embarcación avance durante más tiempo con un rumbo intermedio entre la referencia anterior y la nueva. Esa lentitud acumulada se transforma en una diferencia importante de posición final. En cambio, la agresividad de la Parte A permite corregir el rumbo más cerca de los instantes de cambio de referencia y por eso respeta mejor la trayectoria ideal. La pregunta de diseño pasa entonces a ser física: si el actuador y la embarcación soportan esa agresividad, la Parte A reproduce mejor la trayectoria; si no, el LQI intermedio es una alternativa más realista y suave.
 
 \subsection{Ventajas y desventajas de asignación de polos y LQI}
 
-La asignación de polos tiene como ventaja principal que permite imponer de forma directa la dinámica deseada del sistema aumentado. Es un método claro para fijar la velocidad de respuesta y garantizar estabilidad si el sistema es controlable. Sin embargo, no optimiza el esfuerzo de control y puede producir señales de control muy elevadas, como se observa en la Parte A.
+La asignación de polos tiene como ventaja principal que permite imponer de forma directa la dinámica deseada del sistema aumentado. Es un método claro para fijar la velocidad de respuesta y garantizar estabilidad si el sistema es controlable. En este trabajo esa rapidez también favorece la reconstrucción de trayectoria, ya que el rumbo se corrige cerca de los instantes en que cambia la referencia. Sin embargo, el método no optimiza el esfuerzo de control y puede producir señales de control muy elevadas, como se observa en la Parte A.
 
-El LQI, en cambio, permite incorporar compromisos de diseño mediante $Q_a$ y $R$. Esto hace posible reducir el esfuerzo de control y ajustar la respuesta de manera más gradual. Su desventaja es que la elección de pesos no es única y requiere un proceso de diseño iterativo: modificar $Q_a$ y $R$ cambia simultáneamente seguimiento, esfuerzo, polos y trayectoria. En este problema, LQI resulta conveniente cuando se busca cuidar la señal de control, mientras que la asignación de polos es útil si se prioriza una respuesta rápida y directa.
+El LQI, en cambio, permite incorporar compromisos de diseño mediante $Q_a$ y $R$. Esto hace posible reducir el esfuerzo de control y ajustar la respuesta de manera más gradual. Su desventaja es que la elección de pesos no es única y requiere un proceso de diseño iterativo: modificar $Q_a$ y $R$ cambia simultáneamente seguimiento, esfuerzo, polos y trayectoria. Además, como el costo LQI se formula sobre el rumbo y los estados aumentados, no garantiza por sí solo que la trayectoria en $X,Y$ sea la más cercana a la ideal. En este problema, LQI resulta conveniente cuando se busca cuidar la señal de control, mientras que la asignación de polos es útil si se prioriza una respuesta rápida y directa.
 
 \FloatBarrier
