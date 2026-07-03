@@ -13,9 +13,9 @@
 \contentsline {section}{\numberline {4}Parte B - Reconstrucción de trayectoria en el plano}{6}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Ecuaciones cinemáticas}{6}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Integración de la trayectoria}{6}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Trayectoria obtenida}{6}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Efecto de los cambios de referencia}{7}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}Discusión para el informe}{7}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.3}Trayectoria obtenida}{7}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Análisis de la trayectoria}{7}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Discusión}{7}{subsection.4.5}%
 \contentsline {section}{\numberline {5}Parte C - Control de rumbo mediante LQI}{7}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Ecuación de estado y función de costo}{7}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Aplicabilidad del LQI}{8}{subsection.5.2}%

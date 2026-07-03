@@ -45,14 +45,17 @@ La Figura~\ref{fig:parte-b-trayectoria} muestra la trayectoria reconstruida en e
 \label{fig:parte-b-trayectoria}
 \end{figure}
 
-\subsection{Efecto de los cambios de referencia}
+\subsection{Análisis de la trayectoria}
 
-Los cambios de referencia de rumbo modifican la curvatura de la trayectoria. Para $\psi_{ref}=0$, el avance es principalmente longitudinal. En $t=10\,\mathrm{s}$, la referencia pasa a $\pi/6$ y la trayectoria comienza a curvarse hacia valores positivos de $Y$. En $t=25\,\mathrm{s}$, la referencia cambia a $-\pi/6$, por lo que la curvatura se invierte. Finalmente, en $t=40\,\mathrm{s}$, el salto a $\pi/3$ genera una pendiente mayor en el plano.
+Se observa en la figura~\ref{fig:parte-b-trayectoria} que en cada cambio de trayectoria, el controlador logra orientar la embarcación correctamente. Sin embargo, como no es posible hacer el ajuste de forma instantánea, la trayectoria real acumula un pequeño error contra la trayectoria perfecta en cada giro. Este comportamiento se puede observar principalmente en el instante $t=40\,s$.
 
-\subsection{Discusión para el informe}
+Como se vio en la parte A, con polos situados más a la izquiera se podrían conseguir respuestas más rápidas y reducir el error, a costo de picos altos en la señal de control y cambios más bruscos.
 
-La trayectoria reconstruida es consistente con los cambios de rumbo pedidos: cada salto de referencia se traduce en un cambio de curvatura en el plano. Sin embargo, $X$ e $Y$ no son salidas controladas; solamente se calculan integrando las ecuaciones cinemáticas a partir de $v(t)$ y $\psi(t)$. Por este motivo, el controlador no corrige errores de posición ni intenta seguir una trayectoria geométrica prefijada.
+Incluso con un control más fuerte, según las ecuaciones cinemáticas, $v(t)$ afecta a $\dot{X}$ e $\dot{Y}$ con $-v\sin(\psi)$ y $+v\cos(\psi)$, respectivamente. Esto significa que incluso si el ángulo de rumbo $\psi$ fuera exactamente el deseado, la presencia de $v(t)$ hace que la dirección real de desplazamiento difiera levemente de la dirección apuntada por el barco.
 
-La trayectoria perfecta utilizada como referencia cinemática no es físicamente alcanzable con este modelo, ya que supone cambios instantáneos de rumbo en los instantes de conmutación. En el sistema realimentado, $\psi(t)$ necesita un tiempo finito para alcanzar cada nuevo valor de referencia. Además, la velocidad lateral $v(t)$ hace que la dirección instantánea de movimiento no coincida exactamente con el ángulo de rumbo. Si se quisiera controlar directamente la posición en el plano $XY$, sería necesario reformular el problema incorporando realimentación de posición y tratando la cinemática no lineal del sistema.
+\subsection{Discusión}
+Si se quisiera controlar directamente la posición en el plano $XY$, sería necesario reformular el problema incorporando realimentación de posición y pasando a MIMO. 
+Esto no se podría resolver con el controlador diseñado en la Parte A, ya que la relación entre la entrada de control ($\tau_r$) y las posiciones $X$, $Y$ en el plano es no lineal porque que depende de $\sin(\psi)$ y $\cos(\psi)$.
+Para controlar la posición, se tendría que diseñar un controlador no lineal o linealizar el sistema alrededor de un punto para luego aplicar técnicas de control lineal.
 
 \FloatBarrier

@@ -126,7 +126,7 @@ Se utiliza la ley de control
 K_a = [k_v\ k_r\ k_\psi\ k_i].
 \end{equation}
 
-Primero se eligieron los polos deseados del sistema aumentado y luego se calculó la ganancia $K_a$. Para ello se utilizó la función \texttt{control.place}. Esta función es un wrapper de \texttt{scipy.signal.place\_poles}, que implementa el algoritmo de Tits-Yang para asignación robusta de polos por realimentación de estados.
+Primero se eligieron los polos deseados del sistema aumentado y luego se calculó la ganancia $K_a$. Para ello se utilizó la función \texttt{control.place}
 
 Los polos asignados y la ganancia obtenida se muestran, en ese orden, en las Tablas~\ref{tab:parte-a-polos} y~\ref{tab:parte-a-ganancias}.
 
@@ -175,10 +175,20 @@ De los resultados obtenidos se observa que:
 \begin{itemize}
     \item La embarcación logra seguir la referencia de rumbo por tramos. En cada cambio de consigna aparece un transitorio, pero la salida converge al nuevo valor de referencia.
     \item El error estacionario es prácticamente nulo, lo cual es consistente con la incorporación del integrador del error.
-    \item La respuesta es rápida debido a la ubicación de los polos en $[-1.5,\,-2.0,\,-2.5,\,-3.0]$.
-    \item El costo de esa rapidez es una señal de control elevada, con $\max |\tau_r| = 18.5989$.
-    \item La señal de control presenta picos importantes en los instantes de cambio de referencia. Esto puede ser problemático si el actuador real tiene límites de saturación o restricciones de potencia.
-    \item Si los polos se ubicaran más a la izquierda, la respuesta sería más rápida, pero aumentaría el esfuerzo de control y podrían aparecer transitorios más bruscos. Si se ubicaran más cerca del origen, la respuesta sería más lenta y suave, con menor exigencia sobre el actuador.
+    \item La respuesta es rápida, pero el costo es una señal de control elevada con picos importantes, llegando a $\max |\tau_r| = 18.5989$.  Esto puede ser problemático si el actuador real tiene límites de saturación o restricciones de potencia.
 \end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{parteA/seguimiento_comparacion.png}
+\caption{Seguimiento de referencia por tramos para distintos polos.}
+\label{fig:parte-a-seguimiento-comparacion}
+\end{figure}
+
+\begin{itemize}
+    \item Se puede observar en la figura~\ref{fig:parte-a-seguimiento-comparacion} que una selección de polos más a la izquierda genera una respuesta más rápida, pero con picos de control más altos. Por el contrario, polos más cercanos al origen generan una respuesta más lenta y suave, con menor exigencia sobre el actuador.
+\end{itemize}
+
+
 
 \FloatBarrier
