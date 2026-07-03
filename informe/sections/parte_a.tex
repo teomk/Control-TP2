@@ -168,15 +168,9 @@ La Figura~\ref{fig:parte-a-error-estados-control} resume el error de seguimiento
 
 \input{tables/parte_a_metricas}
 
-\subsection{Discusión de desempeño}
+\subsection{Discusiones}
 
-De los resultados obtenidos se observa que:
-
-\begin{itemize}
-    \item La embarcación logra seguir la referencia de rumbo por tramos. En cada cambio de consigna aparece un transitorio, pero la salida converge al nuevo valor de referencia.
-    \item El error estacionario es prácticamente nulo, lo cual es consistente con la incorporación del integrador del error.
-    \item La respuesta es rápida, pero el costo es una señal de control elevada con picos importantes, llegando a $\max |\tau_r| = 18.5989$.  Esto puede ser problemático si el actuador real tiene límites de saturación o restricciones de potencia.
-\end{itemize}
+La embarcación logra seguir la referencia de rumbo por tramos. En cada cambio de consigna aparece un transitorio, pero la salida eventualmente converge al nuevo valor de referencia con error estacionario nulo gracias al integrador.
 
 \begin{figure}[H]
 \centering
@@ -185,10 +179,10 @@ De los resultados obtenidos se observa que:
 \label{fig:parte-a-seguimiento-comparacion}
 \end{figure}
 
-\begin{itemize}
-    \item Se puede observar en la figura~\ref{fig:parte-a-seguimiento-comparacion} que una selección de polos más a la izquierda genera una respuesta más rápida, pero con picos de control más altos. Por el contrario, polos más cercanos al origen generan una respuesta más lenta y suave, con menor exigencia sobre el actuador.
-\end{itemize}
+Se puede observar en la figura~\ref{fig:parte-a-seguimiento-comparacion} que una selección de polos más a la izquierda genera una respuesta más rápida, pero con picos de control $\tau_r$ más altos que podrían superar a las capacidades del actuador. Por el contrario, polos más cercanos al origen generan una respuesta más lenta y suave, con menor exigencia sobre el actuador.
 
+En la práctica, conviene elegir polos que resulten en una respuesta lo suficientemente veloz y suave, sin exigir al actuador por sobre su límite. Para este caso no se conocen esos límites, pero se considera que el ejemplo graficado en naranja es un buen punto medio.
 
+Para definir la velocidad ideal, en el caso del barco, también sería necesario considerar que movimentos demasiado bruscos podrían desestabilizar la embarcación.
 
 \FloatBarrier

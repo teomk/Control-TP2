@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1783042714.70547 "/Users/marcelokaucher/Desktop/Teo/Programacion/2026_A/control/Control-TP2/informe/main.tex" "main.pdf" "main" 1783042722.62163 0
+["pdflatex"] 1783044628.99762 "/Users/marcelokaucher/Desktop/Teo/Programacion/2026_A/control/Control-TP2/informe/main.tex" "main.pdf" "main" 1783044637.70164 0
   "../plots/parteA/error_estados_control.png" 1783034786.72712 335417 f1fe64a765bd7e68453cbc7c334ab931 ""
   "../plots/parteA/seguimiento.png" 1783034785.46681 98946 56fb8fb8cde60b870dbf0c9ded7db268 ""
   "../plots/parteA/seguimiento_comparacion.png" 1783034923.60535 145834 671372eac3402d8320fcea0c810bd743 ""
@@ -147,11 +147,11 @@
   "/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1776701630 5573038 b99aad5e4898a9034e953632f940512b ""
   "/usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1776701558 3636769 7bb34b5968ea5f4ea248930ae06be89d ""
   "/usr/local/texlive/2026/texmf.cnf" 1774209515 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
-  "main.aux" 1783042722.40257 11596 be938816d164e9d8d6f3c884cb8e4752 "pdflatex"
-  "main.out" 1783042722.40578 6062 96c813c8ba119310645014dd46138234 "pdflatex"
+  "main.aux" 1783044637.45717 11596 be938816d164e9d8d6f3c884cb8e4752 "pdflatex"
+  "main.out" 1783044637.46051 6062 96c813c8ba119310645014dd46138234 "pdflatex"
   "main.tex" 1783031299.10097 3732 a31e4f4181e5eceaef1c93dcb600813b ""
-  "main.toc" 1783042722.4063 2679 5a3b5218fa8245c772cf60c016632962 "pdflatex"
-  "sections/parte_a.tex" 1783035769.82362 5491 1fcddb04ae4ca053ec15182866ba06fc ""
+  "main.toc" 1783044637.46193 2679 5a3b5218fa8245c772cf60c016632962 "pdflatex"
+  "sections/parte_a.tex" 1783044628.57728 5548 73947484e69ae153790a9bdbea6bbb73 ""
   "sections/parte_b.tex" 1783039628.97007 2857 884edfb295ef765709b6eae578fdc6a2 ""
   "sections/parte_c.tex" 1783042706.06979 9833 caac3249dfe76ce639c913d6e07a0678 ""
   "tables/parte_a_ganancias.tex" 1783030368.84804 560 63e63230805be2dae655c3355f10a5f6 ""
